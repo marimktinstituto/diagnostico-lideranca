@@ -114,9 +114,11 @@
 <body>
 
 <div class="hero">
+  <div style="font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-bottom:10px;">Instituto Professor Alfredo Saidneuy</div>
   <div class="badge">DIAGNÓSTICO GRATUITO</div>
   <h1 style="margin-top:14px">Diagnóstico Estratégico de<br>Maturidade da Liderança</h1>
   <p>Sua liderança está preparada para sustentar o crescimento da empresa?</p>
+  <div style="margin-top:4px; font-size:.82rem; opacity:.6; font-style:italic;">Uma iniciativa do Instituto Professor Alfredo Saidneuy</div>
 </div>
 
 <!-- CADASTRO -->
@@ -185,6 +187,7 @@
 
 <script>
 const FORMSPREE = 'https://formspree.io/f/mzdqjpzo';
+const RD_TOKEN  = '50e6673590d2dc8d6c7e6d9aad9029cd';
 
 const pilares = [
   { num:1, titulo:"COMUNICAÇÃO E FEEDBACK", perguntas:[
@@ -375,17 +378,45 @@ async function calcular() {
 
   const statusEl = document.getElementById('envioStatus');
   try {
+    // 1) Formspree
     const resp = await fetch(FORMSPREE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
     });
-    if (resp.ok) {
-      statusEl.className = 'envio-status ok';
-      statusEl.textContent = '✅ Resultado enviado com sucesso! Em breve entraremos em contato.';
-    } else {
-      throw new Error('Erro no envio');
-    }
+    if (!resp.ok) throw new Error('Formspree error');
+
+    // 2) RD Station Marketing — conversão via API pública
+    const [firstName, ...rest] = document.getElementById('f_nome').value.trim().split(' ');
+    const rdPayload = {
+      event_type: 'CONVERSION',
+      event_family: 'CDP',
+      payload: {
+        conversion_identifier: 'Diagnóstico de Maturidade da Liderança',
+        name: document.getElementById('f_nome').value,
+        email: document.getElementById('f_email').value,
+        mobile_phone: document.getElementById('f_whats').value,
+        job_title: document.getElementById('f_cargo').value,
+        company_name: document.getElementById('f_empresa').value,
+        cf_pontuacao_diagnostico: `${total}/100`,
+        cf_nivel_maturidade: nivel.label,
+        cf_pilar_1_comunicacao: `${scores[0]}/20`,
+        cf_pilar_2_inteligencia_emocional: `${scores[1]}/20`,
+        cf_pilar_3_desenvolvimento: `${scores[2]}/20`,
+        cf_pilar_4_cultura: `${scores[3]}/20`,
+        cf_pilar_5_gestao_resultados: `${scores[4]}/20`,
+        tags: ['diagnostico-lideranca', nivel.label.toLowerCase().replace(/ /g,'-')]
+      }
+    };
+
+    await fetch(`https://api.rd.services/platform/events?api_key=${RD_TOKEN}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(rdPayload)
+    });
+
+    statusEl.className = 'envio-status ok';
+    statusEl.textContent = '✅ Resultado enviado com sucesso! Em breve entraremos em contato.';
   } catch(e) {
     statusEl.className = 'envio-status erro';
     statusEl.textContent = '❌ Não foi possível enviar os dados. Verifique sua conexão e tente novamente.';
