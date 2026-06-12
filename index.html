@@ -6,424 +6,108 @@
   <title>Diagnóstico de Maturidade da Liderança</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f0f4f8;
-      color: #1a2332;
-      min-height: 100vh;
-    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a2332; min-height: 100vh; }
 
     .hero {
       background: linear-gradient(135deg, #1a2f5e 0%, #2d5a9e 60%, #3b7dd8 100%);
-      color: white;
-      padding: 48px 24px 40px;
-      text-align: center;
+      color: white; padding: 48px 24px 40px; text-align: center;
     }
+    .hero h1 { font-size: clamp(1.4rem,4vw,2.2rem); font-weight:800; letter-spacing:-.02em; margin-bottom:12px; line-height:1.2; }
+    .hero p { font-size:1rem; opacity:.88; max-width:640px; margin:0 auto 20px; line-height:1.6; }
+    .badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); border-radius:20px; padding:5px 16px; font-size:.82rem; font-weight:600; letter-spacing:.04em; }
 
-    .hero h1 {
-      font-size: clamp(1.4rem, 4vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-      line-height: 1.2;
+    /* CADASTRO */
+    .cadastro-card {
+      background:white; border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,.1);
+      max-width:760px; margin:-20px auto 0; position:relative; z-index:1;
+      padding:28px 28px 24px;
     }
-
-    .hero p {
-      font-size: 1rem;
-      opacity: 0.88;
-      max-width: 640px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
+    .cadastro-card h3 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#2d5a9e; margin-bottom:18px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .form-group { display:flex; flex-direction:column; gap:5px; }
+    .form-group.full { grid-column:1/-1; }
+    .form-group label { font-size:.78rem; font-weight:600; color:#4a5a6e; text-transform:uppercase; letter-spacing:.05em; }
+    .form-group input {
+      border:2px solid #dde5f0; border-radius:8px; padding:10px 12px;
+      font-size:.9rem; color:#1a2332; outline:none; transition:border .15s;
+      background:#fafcff;
     }
-
-    .badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 20px;
-      padding: 5px 16px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
+    .form-group input:focus { border-color:#2d5a9e; background:white; }
+    .form-group input.erro { border-color:#e05252; background:#fff8f8; }
 
     .scale-legend {
-      background: white;
-      border-left: 4px solid #2d5a9e;
-      border-radius: 0 10px 10px 0;
-      margin: -20px auto 0;
-      max-width: 760px;
-      padding: 20px 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      position: relative;
-      z-index: 1;
+      background:white; border-left:4px solid #2d5a9e; border-radius:0 10px 10px 0;
+      max-width:760px; margin:20px auto 0; padding:20px 24px;
+      box-shadow:0 4px 20px rgba(0,0,0,.08);
     }
+    .scale-legend h3 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#2d5a9e; margin-bottom:12px; }
+    .scale-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; }
+    .scale-item { display:flex; align-items:flex-start; gap:8px; }
+    .scale-num { background:#2d5a9e; color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700; flex-shrink:0; margin-top:1px; }
+    .scale-item small { font-size:.8rem; line-height:1.4; color:#444; }
+    .scale-item strong { display:block; font-size:.82rem; color:#1a2332; }
 
-    .scale-legend h3 {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #2d5a9e;
-      margin-bottom: 12px;
-    }
+    .container { max-width:760px; margin:32px auto; padding:0 16px 60px; }
 
-    .scale-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 8px;
-    }
+    .pilar { background:white; border-radius:14px; box-shadow:0 2px 16px rgba(0,0,0,.07); margin-bottom:24px; overflow:hidden; }
+    .pilar-header { background:linear-gradient(90deg,#1a2f5e,#2d5a9e); color:white; padding:16px 22px; display:flex; align-items:center; gap:12px; }
+    .pilar-num { background:rgba(255,255,255,.22); border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0; }
+    .pilar-header h2 { font-size:1rem; font-weight:700; }
+    .pilar-body { padding:8px 0 0; }
 
-    .scale-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
+    .question { display:flex; align-items:flex-start; gap:14px; padding:14px 22px; border-bottom:1px solid #f0f4f8; transition:background .15s; }
+    .question:last-of-type { border-bottom:none; }
+    .question:hover { background:#fafcff; }
+    .q-text { flex:1; font-size:.9rem; line-height:1.5; color:#2a3a50; padding-top:6px; }
+    .radio-group { display:flex; gap:6px; flex-shrink:0; }
+    .radio-group label { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; }
+    .radio-group input[type="radio"] { display:none; }
+    .radio-btn { width:36px; height:36px; border-radius:8px; border:2px solid #d0dbe8; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.9rem; color:#7a90a8; transition:all .15s; background:#f7f9fc; user-select:none; }
+    .radio-group input[type="radio"]:checked + .radio-btn { background:#2d5a9e; border-color:#2d5a9e; color:white; box-shadow:0 2px 8px rgba(45,90,158,.35); transform:scale(1.08); }
+    .radio-btn:hover { border-color:#2d5a9e; color:#2d5a9e; }
 
-    .scale-num {
-      background: #2d5a9e;
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
+    .pilar-footer { background:#f5f8ff; padding:12px 22px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid #e8eef8; }
+    .pilar-footer span { font-size:.82rem; color:#6a7f9a; font-weight:500; }
+    .pilar-score { font-size:1.1rem; font-weight:800; color:#2d5a9e; }
+    .pilar-score .denom { font-size:.82rem; font-weight:500; color:#8a9ab0; }
+    .mini-bar { height:5px; background:#dde5f0; border-radius:3px; margin-top:6px; overflow:hidden; width:80px; }
+    .mini-bar-fill { height:100%; background:linear-gradient(90deg,#2d5a9e,#3b7dd8); border-radius:3px; transition:width .4s ease; width:0%; }
 
-    .scale-item small {
-      font-size: 0.8rem;
-      line-height: 1.4;
-      color: #444;
-    }
+    .submit-area { text-align:center; margin-top:32px; }
+    .btn-calcular { background:linear-gradient(135deg,#1a2f5e,#2d5a9e); color:white; border:none; border-radius:12px; padding:16px 48px; font-size:1rem; font-weight:700; cursor:pointer; box-shadow:0 4px 18px rgba(45,90,158,.4); transition:transform .15s,box-shadow .15s; letter-spacing:.02em; }
+    .btn-calcular:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(45,90,158,.5); }
+    .btn-calcular:active { transform:translateY(0); }
+    .btn-calcular:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+    .btn-reset { background:none; border:2px solid #d0dbe8; color:#6a7f9a; border-radius:10px; padding:12px 28px; font-size:.88rem; font-weight:600; cursor:pointer; margin-top:12px; transition:all .15s; }
+    .btn-reset:hover { border-color:#2d5a9e; color:#2d5a9e; }
 
-    .scale-item strong {
-      display: block;
-      font-size: 0.82rem;
-      color: #1a2332;
-    }
-
-    .container {
-      max-width: 760px;
-      margin: 32px auto;
-      padding: 0 16px 60px;
-    }
-
-    .pilar {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-      margin-bottom: 24px;
-      overflow: hidden;
-    }
-
-    .pilar-header {
-      background: linear-gradient(90deg, #1a2f5e, #2d5a9e);
-      color: white;
-      padding: 16px 22px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .pilar-num {
-      background: rgba(255,255,255,0.22);
-      border-radius: 8px;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .pilar-header h2 {
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .pilar-body {
-      padding: 8px 0 0;
-    }
-
-    .question {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 22px;
-      border-bottom: 1px solid #f0f4f8;
-      transition: background 0.15s;
-    }
-
-    .question:last-of-type { border-bottom: none; }
-    .question:hover { background: #fafcff; }
-
-    .q-text {
-      flex: 1;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: #2a3a50;
-      padding-top: 6px;
-    }
-
-    .radio-group {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .radio-group label {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      cursor: pointer;
-    }
-
-    .radio-group input[type="radio"] { display: none; }
-
-    .radio-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      border: 2px solid #d0dbe8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: #7a90a8;
-      transition: all 0.15s;
-      background: #f7f9fc;
-      user-select: none;
-    }
-
-    .radio-group input[type="radio"]:checked + .radio-btn {
-      background: #2d5a9e;
-      border-color: #2d5a9e;
-      color: white;
-      box-shadow: 0 2px 8px rgba(45,90,158,0.35);
-      transform: scale(1.08);
-    }
-
-    .radio-btn:hover { border-color: #2d5a9e; color: #2d5a9e; }
-
-    .pilar-footer {
-      background: #f5f8ff;
-      padding: 12px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid #e8eef8;
-    }
-
-    .pilar-footer span {
-      font-size: 0.82rem;
-      color: #6a7f9a;
-      font-weight: 500;
-    }
-
-    .pilar-score {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #2d5a9e;
-    }
-
-    .pilar-score .denom {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: #8a9ab0;
-    }
-
-    .mini-bar {
-      height: 5px;
-      background: #dde5f0;
-      border-radius: 3px;
-      margin-top: 6px;
-      overflow: hidden;
-      width: 80px;
-    }
-
-    .mini-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #2d5a9e, #3b7dd8);
-      border-radius: 3px;
-      transition: width 0.4s ease;
-      width: 0%;
-    }
-
-    .submit-area {
-      text-align: center;
-      margin-top: 32px;
-    }
-
-    .btn-calcular {
-      background: linear-gradient(135deg, #1a2f5e, #2d5a9e);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 16px 48px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 18px rgba(45,90,158,0.4);
-      transition: transform 0.15s, box-shadow 0.15s;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-calcular:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(45,90,158,0.5);
-    }
-
-    .btn-calcular:active { transform: translateY(0); }
-
-    .btn-reset {
-      background: none;
-      border: 2px solid #d0dbe8;
-      color: #6a7f9a;
-      border-radius: 10px;
-      padding: 12px 28px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 12px;
-      transition: all 0.15s;
-    }
-
-    .btn-reset:hover { border-color: #2d5a9e; color: #2d5a9e; }
+    .alert { background:#fff3cd; border:1px solid #ffc107; border-radius:10px; padding:12px 16px; font-size:.88rem; color:#856404; margin-top:16px; display:none; }
 
     /* RESULTADO */
-    #resultado {
-      display: none;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-      margin-top: 32px;
-      overflow: hidden;
-      animation: slideUp 0.4s ease;
-    }
+    #resultado { display:none; background:white; border-radius:16px; box-shadow:0 4px 30px rgba(0,0,0,.1); margin-top:32px; overflow:hidden; animation:slideUp .4s ease; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .resultado-header { padding:32px 28px 24px; text-align:center; }
+    .score-circle { width:120px; height:120px; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 20px; font-size:2.4rem; font-weight:900; color:white; box-shadow:0 6px 24px rgba(0,0,0,.15); }
+    .score-circle small { font-size:.8rem; font-weight:500; opacity:.85; }
+    .nivel-title { font-size:1.3rem; font-weight:800; margin-bottom:8px; }
+    .nivel-desc { font-size:.92rem; line-height:1.6; color:#4a5a6e; max-width:520px; margin:0 auto 16px; }
+    .resultado-pilares { padding:0 28px 24px; }
+    .resultado-pilares h3 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#8a9ab0; margin-bottom:14px; }
+    .bar-row { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .bar-label { font-size:.8rem; color:#4a5a6e; width:200px; flex-shrink:0; line-height:1.3; }
+    .bar-track { flex:1; height:10px; background:#eef2f8; border-radius:6px; overflow:hidden; }
+    .bar-fill { height:100%; border-radius:6px; transition:width .8s cubic-bezier(.25,1,.5,1); }
+    .bar-val { font-size:.82rem; font-weight:700; color:#2d5a9e; width:44px; text-align:right; flex-shrink:0; }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .envio-status { margin:0 28px 24px; padding:14px 18px; border-radius:10px; font-size:.9rem; font-weight:600; text-align:center; display:none; }
+    .envio-status.ok { background:#e8f8f0; color:#1a7a4a; border:1px solid #3aad70; }
+    .envio-status.erro { background:#fde8e8; color:#a02020; border:1px solid #e05252; }
 
-    .resultado-header {
-      padding: 32px 28px 24px;
-      text-align: center;
-    }
-
-    .score-circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: white;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-    }
-
-    .score-circle small {
-      font-size: 0.8rem;
-      font-weight: 500;
-      opacity: 0.85;
-    }
-
-    .nivel-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .nivel-desc {
-      font-size: 0.92rem;
-      line-height: 1.6;
-      color: #4a5a6e;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .resultado-pilares {
-      padding: 0 28px 24px;
-    }
-
-    .resultado-pilares h3 {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #8a9ab0;
-      margin-bottom: 14px;
-    }
-
-    .bar-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .bar-label {
-      font-size: 0.8rem;
-      color: #4a5a6e;
-      width: 200px;
-      flex-shrink: 0;
-      line-height: 1.3;
-    }
-
-    .bar-track {
-      flex: 1;
-      height: 10px;
-      background: #eef2f8;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 6px;
-      transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .bar-val {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #2d5a9e;
-      width: 44px;
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    /* alertas de incompleto */
-    .alert {
-      background: #fff3cd;
-      border: 1px solid #ffc107;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 0.88rem;
-      color: #856404;
-      margin-top: 16px;
-      display: none;
-    }
-
-    /* mobile */
-    @media (max-width: 520px) {
-      .question { flex-direction: column; gap: 10px; }
-      .radio-group { justify-content: flex-start; }
-      .bar-label { width: 130px; font-size: 0.74rem; }
+    @media (max-width:520px) {
+      .form-grid { grid-template-columns:1fr; }
+      .question { flex-direction:column; gap:10px; }
+      .radio-group { justify-content:flex-start; }
+      .bar-label { width:130px; font-size:.74rem; }
     }
   </style>
 </head>
@@ -435,39 +119,50 @@
   <p>Sua liderança está preparada para sustentar o crescimento da empresa?</p>
 </div>
 
-<div class="scale-legend" style="margin: -20px auto 0; max-width: 760px; margin-left: auto; margin-right: auto;">
-  <h3>Como responder</h3>
-  <div class="scale-grid">
-    <div class="scale-item">
-      <div class="scale-num">1</div>
-      <small><strong>Necessita Desenvolvimento</strong>Prática inexistente ou muito limitada.</small>
+<!-- CADASTRO -->
+<div class="cadastro-card" style="max-width:760px;margin:-20px auto 0;">
+  <h3>Seus dados para receber o resultado</h3>
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Nome completo *</label>
+      <input type="text" id="f_nome" placeholder="Seu nome" />
     </div>
-    <div class="scale-item">
-      <div class="scale-num">2</div>
-      <small><strong>Em Desenvolvimento</strong>Existe, mas de forma inconsistente.</small>
+    <div class="form-group">
+      <label>E-mail *</label>
+      <input type="email" id="f_email" placeholder="seu@email.com" />
     </div>
-    <div class="scale-item">
-      <div class="scale-num">3</div>
-      <small><strong>Adequado e Consistente</strong>Acontece regularmente.</small>
+    <div class="form-group">
+      <label>WhatsApp *</label>
+      <input type="tel" id="f_whats" placeholder="(11) 99999-9999" />
     </div>
-    <div class="scale-item">
-      <div class="scale-num">4</div>
-      <small><strong>Excelência e Referência</strong>Consolidada, gera resultados.</small>
+    <div class="form-group">
+      <label>Cargo *</label>
+      <input type="text" id="f_cargo" placeholder="Ex: Diretor, Gerente..." />
+    </div>
+    <div class="form-group full">
+      <label>Empresa *</label>
+      <input type="text" id="f_empresa" placeholder="Nome da empresa" />
     </div>
   </div>
 </div>
 
-<div class="container">
+<div class="scale-legend" style="max-width:760px;margin:20px auto 0;">
+  <h3>Como responder</h3>
+  <div class="scale-grid">
+    <div class="scale-item"><div class="scale-num">1</div><small><strong>Necessita Desenvolvimento</strong>Prática inexistente ou muito limitada.</small></div>
+    <div class="scale-item"><div class="scale-num">2</div><small><strong>Em Desenvolvimento</strong>Existe, mas de forma inconsistente.</small></div>
+    <div class="scale-item"><div class="scale-num">3</div><small><strong>Adequado e Consistente</strong>Acontece regularmente.</small></div>
+    <div class="scale-item"><div class="scale-num">4</div><small><strong>Excelência e Referência</strong>Consolidada, gera resultados.</small></div>
+  </div>
+</div>
 
-  <!-- PILARES -->
+<div class="container">
   <div id="pilares"></div>
 
-  <div id="alerta" class="alert">
-    ⚠️ Algumas perguntas ainda não foram respondidas. Por favor, responda todas antes de calcular.
-  </div>
+  <div id="alerta" class="alert"></div>
 
   <div class="submit-area">
-    <button class="btn-calcular" onclick="calcular()">Calcular Resultado</button><br>
+    <button class="btn-calcular" id="btnCalc" onclick="calcular()">Calcular Resultado</button><br>
     <button class="btn-reset" onclick="resetar()">Recomeçar</button>
   </div>
 
@@ -484,93 +179,75 @@
       <h3>Desempenho por pilar</h3>
       <div id="barras"></div>
     </div>
+    <div id="envioStatus" class="envio-status"></div>
   </div>
-
 </div>
 
 <script>
+const FORMSPREE = 'https://formspree.io/f/mzdqjpzo';
+
 const pilares = [
-  {
-    num: 1,
-    titulo: "COMUNICAÇÃO E FEEDBACK",
-    perguntas: [
-      "Os líderes realizam feedbacks frequentes e estruturados.",
-      "Os colaboradores sabem claramente o que se espera deles.",
-      "Conversas difíceis são conduzidas com respeito e objetividade.",
-      "Existe abertura para ouvir opiniões e sugestões das equipes.",
-      "Problemas são tratados de forma rápida, transparente e construtiva."
-    ]
-  },
-  {
-    num: 2,
-    titulo: "INTELIGÊNCIA EMOCIONAL E RELACIONAMENTOS",
-    perguntas: [
-      "Os líderes mantêm equilíbrio emocional diante das pressões.",
-      "Os conflitos são administrados de forma madura e profissional.",
-      "Os gestores demonstram empatia ao lidar com as pessoas.",
-      "As lideranças adaptam-se bem às mudanças e desafios.",
-      "Os líderes são exemplos de comportamento para suas equipes."
-    ]
-  },
-  {
-    num: 3,
-    titulo: "DESENVOLVIMENTO DE PESSOAS E TALENTOS",
-    perguntas: [
-      "Os gestores dedicam tempo ao desenvolvimento dos colaboradores.",
-      "Existem ações para identificar e desenvolver talentos internos.",
-      "Os líderes acompanham a evolução dos profissionais.",
-      "Há preparação de sucessores para posições estratégicas.",
-      "A liderança estimula autonomia, responsabilidade e protagonismo."
-    ]
-  },
-  {
-    num: 4,
-    titulo: "CULTURA, ENGAJAMENTO E PERTENCIMENTO",
-    perguntas: [
-      "Os líderes reforçam diariamente os valores da empresa.",
-      "Existe coerência entre discurso e prática da liderança.",
-      "As equipes demonstram comprometimento com os objetivos organizacionais.",
-      "Os gestores contribuem positivamente para o clima organizacional.",
-      "As lideranças atuam como multiplicadoras da cultura da empresa."
-    ]
-  },
-  {
-    num: 5,
-    titulo: "GESTÃO PARA RESULTADOS",
-    perguntas: [
-      "Os líderes acompanham regularmente os indicadores de desempenho.",
-      "As metas e prioridades são claras para todos.",
-      "Existe responsabilização pelos resultados alcançados.",
-      "Os gestores equilibram desempenho, produtividade e gestão de pessoas.",
-      "As decisões são tomadas com base em dados, fatos e indicadores."
-    ]
-  }
+  { num:1, titulo:"COMUNICAÇÃO E FEEDBACK", perguntas:[
+    "Os líderes realizam feedbacks frequentes e estruturados.",
+    "Os colaboradores sabem claramente o que se espera deles.",
+    "Conversas difíceis são conduzidas com respeito e objetividade.",
+    "Existe abertura para ouvir opiniões e sugestões das equipes.",
+    "Problemas são tratados de forma rápida, transparente e construtiva."
+  ]},
+  { num:2, titulo:"INTELIGÊNCIA EMOCIONAL E RELACIONAMENTOS", perguntas:[
+    "Os líderes mantêm equilíbrio emocional diante das pressões.",
+    "Os conflitos são administrados de forma madura e profissional.",
+    "Os gestores demonstram empatia ao lidar com as pessoas.",
+    "As lideranças adaptam-se bem às mudanças e desafios.",
+    "Os líderes são exemplos de comportamento para suas equipes."
+  ]},
+  { num:3, titulo:"DESENVOLVIMENTO DE PESSOAS E TALENTOS", perguntas:[
+    "Os gestores dedicam tempo ao desenvolvimento dos colaboradores.",
+    "Existem ações para identificar e desenvolver talentos internos.",
+    "Os líderes acompanham a evolução dos profissionais.",
+    "Há preparação de sucessores para posições estratégicas.",
+    "A liderança estimula autonomia, responsabilidade e protagonismo."
+  ]},
+  { num:4, titulo:"CULTURA, ENGAJAMENTO E PERTENCIMENTO", perguntas:[
+    "Os líderes reforçam diariamente os valores da empresa.",
+    "Existe coerência entre discurso e prática da liderança.",
+    "As equipes demonstram comprometimento com os objetivos organizacionais.",
+    "Os gestores contribuem positivamente para o clima organizacional.",
+    "As lideranças atuam como multiplicadoras da cultura da empresa."
+  ]},
+  { num:5, titulo:"GESTÃO PARA RESULTADOS", perguntas:[
+    "Os líderes acompanham regularmente os indicadores de desempenho.",
+    "As metas e prioridades são claras para todos.",
+    "Existe responsabilização pelos resultados alcançados.",
+    "Os gestores equilibram desempenho, produtividade e gestão de pessoas.",
+    "As decisões são tomadas com base em dados, fatos e indicadores."
+  ]}
 ];
 
 const niveis = [
-  { min: 25, max: 49, label: "Necessita Desenvolvimento Prioritário", color: "#e05252",
-    desc: "Existem fragilidades importantes na liderança que podem impactar diretamente resultados, clima organizacional, produtividade, retenção de talentos e crescimento sustentável da empresa." },
-  { min: 50, max: 74, label: "Em Desenvolvimento", color: "#e09c30",
-    desc: "A organização possui práticas positivas de liderança, porém ainda apresenta oportunidades relevantes de melhoria, alinhamento e fortalecimento da gestão." },
-  { min: 75, max: 89, label: "Competente e Consistente", color: "#3aad70",
-    desc: "As lideranças demonstram maturidade adequada, contribuindo para a gestão de pessoas, fortalecimento da cultura organizacional e alcance dos resultados." },
-  { min: 90, max: 100, label: "Alta Performance e Referência", color: "#2d5a9e",
-    desc: "A liderança representa um diferencial competitivo da organização, influenciando positivamente os resultados, o desenvolvimento das pessoas, a cultura e a sustentabilidade do negócio." }
+  { min:25, max:49, label:"Necessita Desenvolvimento Prioritário", color:"#e05252",
+    desc:"Existem fragilidades importantes na liderança que podem impactar diretamente resultados, clima organizacional, produtividade, retenção de talentos e crescimento sustentável da empresa." },
+  { min:50, max:74, label:"Em Desenvolvimento", color:"#e09c30",
+    desc:"A organização possui práticas positivas de liderança, porém ainda apresenta oportunidades relevantes de melhoria, alinhamento e fortalecimento da gestão." },
+  { min:75, max:89, label:"Competente e Consistente", color:"#3aad70",
+    desc:"As lideranças demonstram maturidade adequada, contribuindo para a gestão de pessoas, fortalecimento da cultura organizacional e alcance dos resultados." },
+  { min:90, max:100, label:"Alta Performance e Referência", color:"#2d5a9e",
+    desc:"A liderança representa um diferencial competitivo da organização, influenciando positivamente os resultados, o desenvolvimento das pessoas, a cultura e a sustentabilidade do negócio." }
 ];
 
-const barColors = ["#3b7dd8", "#6a5acd", "#3aad70", "#e09c30", "#e05a8a"];
+const barColors = ["#3b7dd8","#6a5acd","#3aad70","#e09c30","#e05a8a"];
 
 // Render pilares
 const pilDiv = document.getElementById('pilares');
 pilares.forEach((p, pi) => {
-  const html = `
+  pilDiv.insertAdjacentHTML('beforeend', `
     <div class="pilar" id="pilar-${pi}">
       <div class="pilar-header">
         <div class="pilar-num">${p.num}</div>
         <h2>${p.titulo}</h2>
       </div>
       <div class="pilar-body">
-        ${p.perguntas.map((q, qi) => `
+        ${p.perguntas.map((q,qi) => `
           <div class="question">
             <div class="q-text">${q}</div>
             <div class="radio-group">
@@ -578,11 +255,9 @@ pilares.forEach((p, pi) => {
                 <label>
                   <input type="radio" name="p${pi}q${qi}" value="${v}" onchange="atualizar(${pi})">
                   <div class="radio-btn">${v}</div>
-                </label>
-              `).join('')}
+                </label>`).join('')}
             </div>
-          </div>
-        `).join('')}
+          </div>`).join('')}
       </div>
       <div class="pilar-footer">
         <span>Pontuação do pilar</span>
@@ -591,90 +266,148 @@ pilares.forEach((p, pi) => {
           <div class="mini-bar"><div class="mini-bar-fill" id="mb${pi}"></div></div>
         </div>
       </div>
-    </div>`;
-  pilDiv.insertAdjacentHTML('beforeend', html);
+    </div>`);
 });
 
 function getPilarScore(pi) {
-  let total = 0;
-  pilares[pi].perguntas.forEach((_, qi) => {
+  let t = 0;
+  pilares[pi].perguntas.forEach((_,qi) => {
     const sel = document.querySelector(`input[name="p${pi}q${qi}"]:checked`);
-    if (sel) total += parseInt(sel.value);
+    if (sel) t += parseInt(sel.value);
   });
-  return total;
+  return t;
 }
 
 function atualizar(pi) {
   const s = getPilarScore(pi);
   document.getElementById(`ps${pi}`).textContent = s;
-  document.getElementById(`mb${pi}`).style.width = (s / 20 * 100) + '%';
+  document.getElementById(`mb${pi}`).style.width = (s/20*100)+'%';
 }
 
-function calcular() {
-  // Verificar completo
+function validarCadastro() {
+  const campos = ['f_nome','f_email','f_whats','f_cargo','f_empresa'];
+  let ok = true;
+  campos.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { el.classList.add('erro'); ok = false; }
+    else el.classList.remove('erro');
+  });
+  return ok;
+}
+
+async function calcular() {
+  const alerta = document.getElementById('alerta');
+
+  // Validar cadastro
+  if (!validarCadastro()) {
+    alerta.style.display = 'block';
+    alerta.textContent = '⚠️ Por favor, preencha todos os seus dados antes de calcular.';
+    document.getElementById('f_nome').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  // Validar perguntas
   let incompleto = false;
-  pilares.forEach((p, pi) => {
-    p.perguntas.forEach((_, qi) => {
+  pilares.forEach((p,pi) => {
+    p.perguntas.forEach((_,qi) => {
       if (!document.querySelector(`input[name="p${pi}q${qi}"]:checked`)) incompleto = true;
     });
   });
-  const alerta = document.getElementById('alerta');
   if (incompleto) {
     alerta.style.display = 'block';
-    alerta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    alerta.textContent = '⚠️ Algumas perguntas ainda não foram respondidas. Por favor, responda todas antes de calcular.';
+    alerta.scrollIntoView({behavior:'smooth', block:'center'});
     return;
   }
   alerta.style.display = 'none';
 
-  const scores = pilares.map((_, pi) => getPilarScore(pi));
-  const total = scores.reduce((a, b) => a + b, 0);
+  const scores = pilares.map((_,pi) => getPilarScore(pi));
+  const total = scores.reduce((a,b) => a+b, 0);
+  const nivel = niveis.find(n => total >= n.min && total <= n.max) || niveis[niveis.length-1];
 
-  // Nível
-  const nivel = niveis.find(n => total >= n.min && total <= n.max) || niveis[niveis.length - 1];
-
-  // Score circle
+  // Exibir resultado
   const circle = document.getElementById('scoreCircle');
-  circle.style.background = `linear-gradient(135deg, ${nivel.color}cc, ${nivel.color})`;
+  circle.style.background = `linear-gradient(135deg,${nivel.color}cc,${nivel.color})`;
   document.getElementById('scoreTxt').textContent = total;
   document.getElementById('nivelTitle').textContent = nivel.label;
   document.getElementById('nivelTitle').style.color = nivel.color;
   document.getElementById('nivelDesc').textContent = nivel.desc;
 
-  // Barras por pilar
   const barDiv = document.getElementById('barras');
-  barDiv.innerHTML = pilares.map((p, pi) => {
-    const pct = Math.round(scores[pi] / 20 * 100);
-    return `
-      <div class="bar-row">
-        <div class="bar-label">Pilar ${p.num} – ${p.titulo.split(' ')[0]} ${p.titulo.split(' ').slice(1, 3).join(' ')}</div>
-        <div class="bar-track"><div class="bar-fill" id="bf${pi}" style="width:0%;background:${barColors[pi]}"></div></div>
-        <div class="bar-val">${scores[pi]}/20</div>
-      </div>`;
-  }).join('');
+  barDiv.innerHTML = pilares.map((p,pi) => `
+    <div class="bar-row">
+      <div class="bar-label">Pilar ${p.num} – ${p.titulo.split(' ').slice(0,3).join(' ')}</div>
+      <div class="bar-track"><div class="bar-fill" id="bf${pi}" style="width:0%;background:${barColors[pi]}"></div></div>
+      <div class="bar-val">${scores[pi]}/20</div>
+    </div>`).join('');
 
   const res = document.getElementById('resultado');
   res.style.display = 'block';
-  res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  res.scrollIntoView({behavior:'smooth', block:'start'});
 
-  // Animate bars
   setTimeout(() => {
-    pilares.forEach((_, pi) => {
-      const pct = Math.round(scores[pi] / 20 * 100);
+    pilares.forEach((_,pi) => {
       const el = document.getElementById(`bf${pi}`);
-      if (el) el.style.width = pct + '%';
+      if (el) el.style.width = Math.round(scores[pi]/20*100)+'%';
     });
   }, 100);
+
+  // Enviar para Formspree
+  const btn = document.getElementById('btnCalc');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const payload = {
+    _replyto: document.getElementById('f_email').value,
+    Nome: document.getElementById('f_nome').value,
+    Email: document.getElementById('f_email').value,
+    WhatsApp: document.getElementById('f_whats').value,
+    Cargo: document.getElementById('f_cargo').value,
+    Empresa: document.getElementById('f_empresa').value,
+    'Pontuação Total': `${total}/100`,
+    'Nível de Maturidade': nivel.label,
+    'Pilar 1 – Comunicação e Feedback': `${scores[0]}/20`,
+    'Pilar 2 – Inteligência Emocional': `${scores[1]}/20`,
+    'Pilar 3 – Desenvolvimento de Pessoas': `${scores[2]}/20`,
+    'Pilar 4 – Cultura e Engajamento': `${scores[3]}/20`,
+    'Pilar 5 – Gestão para Resultados': `${scores[4]}/20`,
+  };
+
+  const statusEl = document.getElementById('envioStatus');
+  try {
+    const resp = await fetch(FORMSPREE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (resp.ok) {
+      statusEl.className = 'envio-status ok';
+      statusEl.textContent = '✅ Resultado enviado com sucesso! Em breve entraremos em contato.';
+    } else {
+      throw new Error('Erro no envio');
+    }
+  } catch(e) {
+    statusEl.className = 'envio-status erro';
+    statusEl.textContent = '❌ Não foi possível enviar os dados. Verifique sua conexão e tente novamente.';
+  }
+  statusEl.style.display = 'block';
+  btn.disabled = false;
+  btn.textContent = 'Calcular Resultado';
 }
 
 function resetar() {
   document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-  pilares.forEach((_, pi) => {
+  ['f_nome','f_email','f_whats','f_cargo','f_empresa'].forEach(id => {
+    document.getElementById(id).value = '';
+    document.getElementById(id).classList.remove('erro');
+  });
+  pilares.forEach((_,pi) => {
     document.getElementById(`ps${pi}`).textContent = '0';
     document.getElementById(`mb${pi}`).style.width = '0%';
   });
   document.getElementById('resultado').style.display = 'none';
   document.getElementById('alerta').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
 </body>
