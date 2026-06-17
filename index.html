@@ -8,6 +8,20 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a2332; min-height: 100vh; }
 
+    /* ===== TOPBAR FIXA DE PROGRESSO ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: white; border-bottom: 1px solid #e8eef8;
+      padding: 12px 20px; display: none;
+    }
+    .topbar.show { display: block; }
+    .topbar-inner { max-width: 760px; margin: 0 auto; display:flex; align-items:center; gap:14px; }
+    .topbar-label { font-size:.78rem; font-weight:700; color:#2d5a9e; white-space:nowrap; }
+    .topbar-track { flex:1; height:8px; background:#e8eef8; border-radius:6px; overflow:hidden; }
+    .topbar-fill { height:100%; background:linear-gradient(90deg,#2d5a9e,#3b7dd8); border-radius:6px; transition:width .4s ease; width:0%; }
+    .topbar-pct { font-size:.78rem; font-weight:700; color:#6a7f9a; white-space:nowrap; }
+
+    /* ===== HERO ===== */
     .hero {
       background: linear-gradient(135deg, #1a2f5e 0%, #2d5a9e 60%, #3b7dd8 100%);
       color: white; padding: 48px 24px 40px; text-align: center;
@@ -16,30 +30,33 @@
     .hero p { font-size:1rem; opacity:.88; max-width:640px; margin:0 auto 20px; line-height:1.6; }
     .badge { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); border-radius:20px; padding:5px 16px; font-size:.82rem; font-weight:600; letter-spacing:.04em; }
 
-    /* CADASTRO */
-    .cadastro-card {
-      background:white; border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,.1);
-      max-width:760px; margin:-20px auto 0; position:relative; z-index:1;
-      padding:28px 28px 24px;
+    /* ===== TELA DE INTRODUÇÃO ===== */
+    .intro-card {
+      background:white; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,.1);
+      max-width:680px; margin:-20px auto 40px; position:relative; z-index:1;
+      padding:36px 32px; text-align:center;
     }
-    .cadastro-card h3 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#2d5a9e; margin-bottom:18px; }
-    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .form-group { display:flex; flex-direction:column; gap:5px; }
-    .form-group.full { grid-column:1/-1; }
-    .form-group label { font-size:.78rem; font-weight:600; color:#4a5a6e; text-transform:uppercase; letter-spacing:.05em; }
-    .form-group input {
-      border:2px solid #dde5f0; border-radius:8px; padding:10px 12px;
-      font-size:.9rem; color:#1a2332; outline:none; transition:border .15s;
-      background:#fafcff;
+    .intro-icons { display:flex; justify-content:center; gap:28px; margin-bottom:24px; flex-wrap:wrap; }
+    .intro-icon { display:flex; flex-direction:column; align-items:center; gap:8px; }
+    .intro-icon-circle { width:52px; height:52px; border-radius:50%; background:#eef4ff; display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+    .intro-icon span { font-size:.76rem; color:#4a5a6e; font-weight:600; max-width:90px; line-height:1.3; }
+    .intro-card h2 { font-size:1.25rem; font-weight:800; color:#1a2332; margin-bottom:14px; line-height:1.4; }
+    .intro-card p { font-size:.92rem; color:#4a5a6e; line-height:1.65; max-width:520px; margin:0 auto 22px; }
+    .intro-card p strong { color:#2d5a9e; }
+    .btn-comecar {
+      background: linear-gradient(135deg,#1a2f5e,#2d5a9e); color:white; border:none; border-radius:12px;
+      padding:16px 44px; font-size:1.02rem; font-weight:700; cursor:pointer;
+      box-shadow:0 4px 18px rgba(45,90,158,.4); transition:transform .15s, box-shadow .15s;
     }
-    .form-group input:focus { border-color:#2d5a9e; background:white; }
-    .form-group input.erro { border-color:#e05252; background:#fff8f8; }
+    .btn-comecar:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(45,90,158,.5); }
+    .intro-note { margin-top:14px; font-size:.8rem; color:#8a9ab0; }
 
     .scale-legend {
       background:white; border-left:4px solid #2d5a9e; border-radius:0 10px 10px 0;
-      max-width:760px; margin:20px auto 0; padding:20px 24px;
-      box-shadow:0 4px 20px rgba(0,0,0,.08);
+      max-width:760px; margin:0 auto 0; padding:20px 24px;
+      box-shadow:0 4px 20px rgba(0,0,0,.08); display:none;
     }
+    .scale-legend.show { display:block; }
     .scale-legend h3 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#2d5a9e; margin-bottom:12px; }
     .scale-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; }
     .scale-item { display:flex; align-items:flex-start; gap:8px; }
@@ -48,8 +65,13 @@
     .scale-item strong { display:block; font-size:.82rem; color:#1a2332; }
 
     .container { max-width:760px; margin:32px auto; padding:0 16px 60px; }
+    #fluxoPerguntas { display:none; }
+    #fluxoPerguntas.show { display:block; }
 
-    .pilar { background:white; border-radius:14px; box-shadow:0 2px 16px rgba(0,0,0,.07); margin-bottom:24px; overflow:hidden; }
+    /* ===== PILAR (uma tela por vez) ===== */
+    .pilar { background:white; border-radius:14px; box-shadow:0 2px 16px rgba(0,0,0,.07); margin-bottom:24px; overflow:hidden; display:none; }
+    .pilar.active { display:block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
     .pilar-header { background:linear-gradient(90deg,#1a2f5e,#2d5a9e); color:white; padding:16px 22px; display:flex; align-items:center; gap:12px; }
     .pilar-num { background:rgba(255,255,255,.22); border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0; }
     .pilar-header h2 { font-size:1rem; font-weight:700; }
@@ -66,22 +88,44 @@
     .radio-group input[type="radio"]:checked + .radio-btn { background:#2d5a9e; border-color:#2d5a9e; color:white; box-shadow:0 2px 8px rgba(45,90,158,.35); transform:scale(1.08); }
     .radio-btn:hover { border-color:#2d5a9e; color:#2d5a9e; }
 
-    .pilar-footer { background:#f5f8ff; padding:12px 22px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid #e8eef8; }
-    .pilar-footer span { font-size:.82rem; color:#6a7f9a; font-weight:500; }
-    .pilar-score { font-size:1.1rem; font-weight:800; color:#2d5a9e; }
-    .pilar-score .denom { font-size:.82rem; font-weight:500; color:#8a9ab0; }
-    .mini-bar { height:5px; background:#dde5f0; border-radius:3px; margin-top:6px; overflow:hidden; width:80px; }
-    .mini-bar-fill { height:100%; background:linear-gradient(90deg,#2d5a9e,#3b7dd8); border-radius:3px; transition:width .4s ease; width:0%; }
+    .pilar-footer { background:#f5f8ff; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid #e8eef8; gap:12px; }
+    .btn-nav { border:none; border-radius:10px; padding:12px 26px; font-size:.9rem; font-weight:700; cursor:pointer; transition:all .15s; }
+    .btn-prev { background:white; color:#6a7f9a; border:2px solid #d0dbe8; }
+    .btn-prev:hover { border-color:#2d5a9e; color:#2d5a9e; }
+    .btn-next { background:linear-gradient(135deg,#1a2f5e,#2d5a9e); color:white; box-shadow:0 3px 12px rgba(45,90,158,.35); }
+    .btn-next:hover { transform:translateY(-1px); }
+    .btn-next:disabled, .btn-prev:disabled { opacity:.4; cursor:not-allowed; transform:none; }
 
-    .submit-area { text-align:center; margin-top:32px; }
+    .alert { background:#fff3cd; border:1px solid #ffc107; border-radius:10px; padding:12px 16px; font-size:.88rem; color:#856404; margin-top:16px; display:none; text-align:center; }
+
+    /* ===== TELA DE CADASTRO (final) ===== */
+    .cadastro-card {
+      background:white; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,.1);
+      padding:32px 28px; display:none; text-align:center;
+    }
+    .cadastro-card.show { display:block; animation: fadeIn .3s ease; }
+    .cadastro-card .check-icon { font-size:2.2rem; margin-bottom:10px; }
+    .cadastro-card h2 { font-size:1.2rem; font-weight:800; color:#1a2332; margin-bottom:8px; }
+    .cadastro-card > p { font-size:.9rem; color:#4a5a6e; margin-bottom:24px; line-height:1.6; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; text-align:left; }
+    .form-group { display:flex; flex-direction:column; gap:5px; }
+    .form-group.full { grid-column:1/-1; }
+    .form-group label { font-size:.78rem; font-weight:600; color:#4a5a6e; text-transform:uppercase; letter-spacing:.05em; }
+    .form-group input {
+      border:2px solid #dde5f0; border-radius:8px; padding:11px 12px;
+      font-size:.92rem; color:#1a2332; outline:none; transition:border .15s;
+      background:#fafcff;
+    }
+    .form-group input:focus { border-color:#2d5a9e; background:white; }
+    .form-group input.erro { border-color:#e05252; background:#fff8f8; }
+
+    .submit-area { text-align:center; margin-top:26px; }
     .btn-calcular { background:linear-gradient(135deg,#1a2f5e,#2d5a9e); color:white; border:none; border-radius:12px; padding:16px 48px; font-size:1rem; font-weight:700; cursor:pointer; box-shadow:0 4px 18px rgba(45,90,158,.4); transition:transform .15s,box-shadow .15s; letter-spacing:.02em; }
     .btn-calcular:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(45,90,158,.5); }
     .btn-calcular:active { transform:translateY(0); }
     .btn-calcular:disabled { opacity:.6; cursor:not-allowed; transform:none; }
     .btn-reset { background:none; border:2px solid #d0dbe8; color:#6a7f9a; border-radius:10px; padding:12px 28px; font-size:.88rem; font-weight:600; cursor:pointer; margin-top:12px; transition:all .15s; }
     .btn-reset:hover { border-color:#2d5a9e; color:#2d5a9e; }
-
-    .alert { background:#fff3cd; border:1px solid #ffc107; border-radius:10px; padding:12px 16px; font-size:.88rem; color:#856404; margin-top:16px; display:none; }
 
     /* RESULTADO */
     #resultado { display:none; background:white; border-radius:16px; box-shadow:0 4px 30px rgba(0,0,0,.1); margin-top:32px; overflow:hidden; animation:slideUp .4s ease; }
@@ -108,10 +152,21 @@
       .question { flex-direction:column; gap:10px; }
       .radio-group { justify-content:flex-start; }
       .bar-label { width:130px; font-size:.74rem; }
+      .intro-icons { gap:16px; }
+      .pilar-footer { flex-wrap:wrap; }
     }
   </style>
 </head>
 <body>
+
+<!-- TOPBAR DE PROGRESSO -->
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-label" id="topbarLabel">Pilar 1 de 5</span>
+    <div class="topbar-track"><div class="topbar-fill" id="topbarFill"></div></div>
+    <span class="topbar-pct" id="topbarPct">0%</span>
+  </div>
+</div>
 
 <div class="hero">
   <div style="font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-bottom:10px;">Instituto Professor Alfredo Saidneuy</div>
@@ -121,34 +176,20 @@
   <div style="margin-top:4px; font-size:.82rem; opacity:.6; font-style:italic;">Uma iniciativa do Instituto Professor Alfredo Saidneuy</div>
 </div>
 
-<!-- CADASTRO -->
-<div class="cadastro-card" style="max-width:760px;margin:-20px auto 0;">
-  <h3>Seus dados para receber o resultado</h3>
-  <div class="form-grid">
-    <div class="form-group">
-      <label>Nome completo *</label>
-      <input type="text" id="f_nome" placeholder="Seu nome" />
-    </div>
-    <div class="form-group">
-      <label>E-mail *</label>
-      <input type="email" id="f_email" placeholder="seu@email.com" />
-    </div>
-    <div class="form-group">
-      <label>WhatsApp *</label>
-      <input type="tel" id="f_whats" placeholder="(11) 99999-9999" />
-    </div>
-    <div class="form-group">
-      <label>Cargo *</label>
-      <input type="text" id="f_cargo" placeholder="Ex: Diretor, Gerente..." />
-    </div>
-    <div class="form-group full">
-      <label>Empresa *</label>
-      <input type="text" id="f_empresa" placeholder="Nome da empresa" />
-    </div>
+<!-- TELA DE INTRODUÇÃO -->
+<div class="intro-card" id="introCard">
+  <div class="intro-icons">
+    <div class="intro-icon"><div class="intro-icon-circle">📝</div><span>25 perguntas rápidas</span></div>
+    <div class="intro-icon"><div class="intro-icon-circle">⏱️</div><span>Leva 5 minutos</span></div>
+    <div class="intro-icon"><div class="intro-icon-circle">📊</div><span>Resultado imediato</span></div>
   </div>
+  <h2>Antes de começar</h2>
+  <p>Você vai avaliar a liderança da sua empresa em <strong>5 pilares essenciais</strong>. Ao final, você recebe sua pontuação geral e descobre exatamente <strong>onde a sua gestão precisa de mais atenção</strong> para sustentar o crescimento do negócio.</p>
+  <button class="btn-comecar" onclick="iniciarDiagnostico()">Começar diagnóstico →</button>
+  <div class="intro-note">Totalmente gratuito · Sem necessidade de cadastro para começar</div>
 </div>
 
-<div class="scale-legend" style="max-width:760px;margin:20px auto 0;">
+<div class="scale-legend" id="scaleLegend">
   <h3>Como responder</h3>
   <div class="scale-grid">
     <div class="scale-item"><div class="scale-num">1</div><small><strong>Necessita Desenvolvimento</strong>Prática inexistente ou muito limitada.</small></div>
@@ -159,13 +200,43 @@
 </div>
 
 <div class="container">
-  <div id="pilares"></div>
 
-  <div id="alerta" class="alert"></div>
+  <div id="fluxoPerguntas">
+    <div id="pilares"></div>
+    <div id="alerta" class="alert"></div>
+  </div>
 
-  <div class="submit-area">
-    <button class="btn-calcular" id="btnCalc" onclick="calcular()">Calcular Resultado</button><br>
-    <button class="btn-reset" onclick="resetar()">Recomeçar</button>
+  <!-- CADASTRO (aparece só depois de responder tudo) -->
+  <div class="cadastro-card" id="cadastroCard">
+    <div class="check-icon">✅</div>
+    <h2>Você respondeu tudo!</h2>
+    <p>Para receber sua pontuação completa e o diagnóstico detalhado, informe seus dados abaixo:</p>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nome completo *</label>
+        <input type="text" id="f_nome" placeholder="Seu nome" />
+      </div>
+      <div class="form-group">
+        <label>E-mail *</label>
+        <input type="email" id="f_email" placeholder="seu@email.com" />
+      </div>
+      <div class="form-group">
+        <label>WhatsApp *</label>
+        <input type="tel" id="f_whats" placeholder="(11) 99999-9999" />
+      </div>
+      <div class="form-group">
+        <label>Cargo *</label>
+        <input type="text" id="f_cargo" placeholder="Ex: Diretor, Gerente..." />
+      </div>
+      <div class="form-group full">
+        <label>Empresa *</label>
+        <input type="text" id="f_empresa" placeholder="Nome da empresa" />
+      </div>
+    </div>
+    <div class="submit-area">
+      <button class="btn-calcular" id="btnCalc" onclick="calcular()">Ver meu resultado</button><br>
+      <button class="btn-reset" onclick="resetar()">Recomeçar</button>
+    </div>
   </div>
 
   <div id="resultado">
@@ -239,12 +310,13 @@ const niveis = [
 ];
 
 const barColors = ["#3b7dd8","#6a5acd","#3aad70","#e09c30","#e05a8a"];
+let pilarAtual = 0;
 
-// Render pilares
+// Render pilares (um de cada vez, navegação por slide)
 const pilDiv = document.getElementById('pilares');
 pilares.forEach((p, pi) => {
   pilDiv.insertAdjacentHTML('beforeend', `
-    <div class="pilar" id="pilar-${pi}">
+    <div class="pilar${pi===0 ? ' active' : ''}" id="pilar-${pi}">
       <div class="pilar-header">
         <div class="pilar-num">${p.num}</div>
         <h2>${p.titulo}</h2>
@@ -256,21 +328,29 @@ pilares.forEach((p, pi) => {
             <div class="radio-group">
               ${[1,2,3,4].map(v => `
                 <label>
-                  <input type="radio" name="p${pi}q${qi}" value="${v}" onchange="atualizar(${pi})">
+                  <input type="radio" name="p${pi}q${qi}" value="${v}" onchange="onAnswer(${pi})">
                   <div class="radio-btn">${v}</div>
                 </label>`).join('')}
             </div>
           </div>`).join('')}
       </div>
       <div class="pilar-footer">
-        <span>Pontuação do pilar</span>
-        <div style="text-align:right">
-          <div class="pilar-score"><span id="ps${pi}">0</span><span class="denom"> / 20</span></div>
-          <div class="mini-bar"><div class="mini-bar-fill" id="mb${pi}"></div></div>
-        </div>
+        <button class="btn-nav btn-prev" onclick="irPara(${pi - 1})" ${pi === 0 ? 'disabled' : ''}>← Voltar</button>
+        <button class="btn-nav btn-next" id="next-${pi}" onclick="avancar(${pi})" disabled>
+          ${pi === pilares.length - 1 ? 'Finalizar →' : 'Próximo pilar →'}
+        </button>
       </div>
     </div>`);
 });
+
+function iniciarDiagnostico() {
+  document.getElementById('introCard').style.display = 'none';
+  document.getElementById('scaleLegend').classList.add('show');
+  document.getElementById('fluxoPerguntas').classList.add('show');
+  document.getElementById('topbar').classList.add('show');
+  atualizarTopbar();
+  document.getElementById('fluxoPerguntas').scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function getPilarScore(pi) {
   let t = 0;
@@ -281,10 +361,48 @@ function getPilarScore(pi) {
   return t;
 }
 
-function atualizar(pi) {
-  const s = getPilarScore(pi);
-  document.getElementById(`ps${pi}`).textContent = s;
-  document.getElementById(`mb${pi}`).style.width = (s/20*100)+'%';
+function pilarCompleto(pi) {
+  return pilares[pi].perguntas.every((_,qi) => document.querySelector(`input[name="p${pi}q${qi}"]:checked`));
+}
+
+function onAnswer(pi) {
+  const nextBtn = document.getElementById(`next-${pi}`);
+  if (nextBtn) nextBtn.disabled = !pilarCompleto(pi);
+}
+
+function atualizarTopbar() {
+  const totalRespondidas = pilares.reduce((acc,_,pi) => acc + (pilarCompleto(pi) ? pilares[pi].perguntas.length :
+    pilares[pi].perguntas.filter((_,qi) => document.querySelector(`input[name="p${pi}q${qi}"]:checked`)).length), 0);
+  const totalPerguntas = pilares.reduce((acc,p) => acc + p.perguntas.length, 0);
+  const pct = Math.round(totalRespondidas / totalPerguntas * 100);
+  document.getElementById('topbarFill').style.width = pct + '%';
+  document.getElementById('topbarPct').textContent = pct + '%';
+  document.getElementById('topbarLabel').textContent = `Pilar ${pilarAtual + 1} de ${pilares.length}`;
+}
+
+function irPara(pi) {
+  if (pi < 0 || pi >= pilares.length) return;
+  document.getElementById(`pilar-${pilarAtual}`).classList.remove('active');
+  pilarAtual = pi;
+  document.getElementById(`pilar-${pilarAtual}`).classList.add('active');
+  atualizarTopbar();
+  document.getElementById('fluxoPerguntas').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function avancar(pi) {
+  if (!pilarCompleto(pi)) return;
+  atualizarTopbar();
+  if (pi === pilares.length - 1) {
+    // Última pergunta respondida -> mostrar cadastro
+    document.getElementById('fluxoPerguntas').classList.remove('show');
+    document.getElementById('scaleLegend').classList.remove('show');
+    document.getElementById('topbar').classList.remove('show');
+    const cad = document.getElementById('cadastroCard');
+    cad.classList.add('show');
+    cad.scrollIntoView({behavior:'smooth', block:'start'});
+  } else {
+    irPara(pi + 1);
+  }
 }
 
 function validarCadastro() {
@@ -299,36 +417,17 @@ function validarCadastro() {
 }
 
 async function calcular() {
-  const alerta = document.getElementById('alerta');
-
-  // Validar cadastro
   if (!validarCadastro()) {
-    alerta.style.display = 'block';
-    alerta.textContent = '⚠️ Por favor, preencha todos os seus dados antes de calcular.';
     document.getElementById('f_nome').scrollIntoView({behavior:'smooth', block:'center'});
     return;
   }
-
-  // Validar perguntas
-  let incompleto = false;
-  pilares.forEach((p,pi) => {
-    p.perguntas.forEach((_,qi) => {
-      if (!document.querySelector(`input[name="p${pi}q${qi}"]:checked`)) incompleto = true;
-    });
-  });
-  if (incompleto) {
-    alerta.style.display = 'block';
-    alerta.textContent = '⚠️ Algumas perguntas ainda não foram respondidas. Por favor, responda todas antes de calcular.';
-    alerta.scrollIntoView({behavior:'smooth', block:'center'});
-    return;
-  }
-  alerta.style.display = 'none';
 
   const scores = pilares.map((_,pi) => getPilarScore(pi));
   const total = scores.reduce((a,b) => a+b, 0);
   const nivel = niveis.find(n => total >= n.min && total <= n.max) || niveis[niveis.length-1];
 
-  // Exibir resultado
+  document.getElementById('cadastroCard').classList.remove('show');
+
   const circle = document.getElementById('scoreCircle');
   circle.style.background = `linear-gradient(135deg,${nivel.color}cc,${nivel.color})`;
   document.getElementById('scoreTxt').textContent = total;
@@ -355,7 +454,6 @@ async function calcular() {
     });
   }, 100);
 
-  // Enviar para Formspree
   const btn = document.getElementById('btnCalc');
   btn.disabled = true;
   btn.textContent = 'Enviando...';
@@ -378,7 +476,6 @@ async function calcular() {
 
   const statusEl = document.getElementById('envioStatus');
   try {
-    // 1) Formspree
     const resp = await fetch(FORMSPREE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -386,8 +483,6 @@ async function calcular() {
     });
     if (!resp.ok) throw new Error('Formspree error');
 
-    // 2) RD Station Marketing — conversão via API pública
-    const [firstName, ...rest] = document.getElementById('f_nome').value.trim().split(' ');
     const rdPayload = {
       event_type: 'CONVERSION',
       event_family: 'CDP',
@@ -423,7 +518,7 @@ async function calcular() {
   }
   statusEl.style.display = 'block';
   btn.disabled = false;
-  btn.textContent = 'Calcular Resultado';
+  btn.textContent = 'Ver meu resultado';
 }
 
 function resetar() {
@@ -433,11 +528,19 @@ function resetar() {
     document.getElementById(id).classList.remove('erro');
   });
   pilares.forEach((_,pi) => {
-    document.getElementById(`ps${pi}`).textContent = '0';
-    document.getElementById(`mb${pi}`).style.width = '0%';
+    document.getElementById(`next-${pi}`).disabled = true;
+    document.getElementById(`pilar-${pi}`).classList.remove('active');
   });
+  pilarAtual = 0;
+  document.getElementById('pilar-0').classList.add('active');
+
   document.getElementById('resultado').style.display = 'none';
+  document.getElementById('cadastroCard').classList.remove('show');
   document.getElementById('alerta').style.display = 'none';
+  document.getElementById('fluxoPerguntas').classList.remove('show');
+  document.getElementById('scaleLegend').classList.remove('show');
+  document.getElementById('topbar').classList.remove('show');
+  document.getElementById('introCard').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
