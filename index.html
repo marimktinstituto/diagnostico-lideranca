@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diagnóstico de Maturidade da Liderança</title>
+  <title>Diagnóstico de Maturidade da Liderança da sua Empresa</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a2332; min-height: 100vh; }
@@ -170,32 +170,32 @@
 
 <div class="hero">
   <div style="font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-bottom:10px;">Instituto Professor Alfredo Saidneuy</div>
-  <div class="badge">DIAGNÓSTICO GRATUITO</div>
-  <h1 style="margin-top:14px">Diagnóstico Estratégico de<br>Maturidade da Liderança</h1>
-  <p>Sua liderança está preparada para sustentar o crescimento da empresa?</p>
+  <div class="badge">EXCLUSIVO PARA DONOS DE EMPRESA</div>
+  <h1 style="margin-top:14px">Meça agora o nível de maturidade<br>da liderança da sua empresa</h1>
+  <p>Descubra em 5 minutos se a gestão da sua empresa está preparada para sustentar o crescimento — e onde você precisa agir primeiro.</p>
   <div style="margin-top:4px; font-size:.82rem; opacity:.6; font-style:italic;">Uma iniciativa do Instituto Professor Alfredo Saidneuy</div>
 </div>
 
 <!-- TELA DE INTRODUÇÃO -->
 <div class="intro-card" id="introCard">
   <div class="intro-icons">
-    <div class="intro-icon"><div class="intro-icon-circle">📝</div><span>25 perguntas rápidas</span></div>
+    <div class="intro-icon"><div class="intro-icon-circle">🏢</div><span>Para donos e sócios de empresa</span></div>
     <div class="intro-icon"><div class="intro-icon-circle">⏱️</div><span>Leva 5 minutos</span></div>
     <div class="intro-icon"><div class="intro-icon-circle">📊</div><span>Resultado imediato</span></div>
   </div>
-  <h2>Antes de começar</h2>
-  <p>Você vai avaliar a liderança da sua empresa em <strong>5 pilares essenciais</strong>. Ao final, você recebe sua pontuação geral e descobre exatamente <strong>onde a sua gestão precisa de mais atenção</strong> para sustentar o crescimento do negócio.</p>
-  <button class="btn-comecar" onclick="iniciarDiagnostico()">Começar diagnóstico →</button>
-  <div class="intro-note">Totalmente gratuito · Sem necessidade de cadastro para começar</div>
+  <h2>Como funciona?</h2>
+  <p>Você vai avaliar o nível de maturidade da liderança da <strong>sua empresa</strong> em 5 pilares essenciais de gestão. Ao final, você recebe a pontuação geral da sua empresa e descobre exatamente <strong>em quais pilares sua gestão precisa evoluir</strong> para sustentar o crescimento do negócio.</p>
+  <button class="btn-comecar" onclick="iniciarDiagnostico()">Começar diagnóstico gratuito →</button>
+  <div class="intro-note">100% gratuito · Sem cadastro para começar · Resultado na hora</div>
 </div>
 
 <div class="scale-legend" id="scaleLegend">
-  <h3>Como responder</h3>
+  <h3>Como responder — avalie a sua empresa como um todo</h3>
   <div class="scale-grid">
-    <div class="scale-item"><div class="scale-num">1</div><small><strong>Necessita Desenvolvimento</strong>Prática inexistente ou muito limitada.</small></div>
-    <div class="scale-item"><div class="scale-num">2</div><small><strong>Em Desenvolvimento</strong>Existe, mas de forma inconsistente.</small></div>
-    <div class="scale-item"><div class="scale-num">3</div><small><strong>Adequado e Consistente</strong>Acontece regularmente.</small></div>
-    <div class="scale-item"><div class="scale-num">4</div><small><strong>Excelência e Referência</strong>Consolidada, gera resultados.</small></div>
+    <div class="scale-item"><div class="scale-num">1</div><small><strong>Necessita Desenvolvimento</strong>Prática inexistente ou muito limitada na empresa.</small></div>
+    <div class="scale-item"><div class="scale-num">2</div><small><strong>Em Desenvolvimento</strong>Existe na empresa, mas de forma inconsistente.</small></div>
+    <div class="scale-item"><div class="scale-num">3</div><small><strong>Adequado e Consistente</strong>Acontece regularmente na empresa.</small></div>
+    <div class="scale-item"><div class="scale-num">4</div><small><strong>Excelência e Referência</strong>Consolidada, gera resultados concretos.</small></div>
   </div>
 </div>
 
@@ -209,8 +209,8 @@
   <!-- CADASTRO (aparece só depois de responder tudo) -->
   <div class="cadastro-card" id="cadastroCard">
     <div class="check-icon">✅</div>
-    <h2>Você respondeu tudo!</h2>
-    <p>Para receber sua pontuação completa e o diagnóstico detalhado, informe seus dados abaixo:</p>
+    <h2>Diagnóstico concluído!</h2>
+    <p>Informe seus dados abaixo para ver o nível de maturidade da liderança da sua empresa e os pontos que precisam de mais atenção:</p>
     <div class="form-grid">
       <div class="form-group">
         <label>Nome completo *</label>
@@ -226,7 +226,7 @@
       </div>
       <div class="form-group">
         <label>Cargo *</label>
-        <input type="text" id="f_cargo" placeholder="Ex: Diretor, Gerente..." />
+        <input type="text" id="f_cargo" placeholder="Ex: Dono, Sócio, CEO..." />
       </div>
       <div class="form-group full">
         <label>Empresa *</label>
@@ -234,7 +234,7 @@
       </div>
     </div>
     <div class="submit-area">
-      <button class="btn-calcular" id="btnCalc" onclick="calcular()">Ver meu resultado</button><br>
+      <button class="btn-calcular" id="btnCalc" onclick="calcular()">Ver o nível da minha empresa</button><br>
       <button class="btn-reset" onclick="resetar()">Recomeçar</button>
     </div>
   </div>
@@ -511,7 +511,7 @@ async function calcular() {
     });
 
     statusEl.className = 'envio-status ok';
-    statusEl.textContent = '✅ Resultado enviado com sucesso! Em breve entraremos em contato.';
+    statusEl.textContent = '✅ Diagnóstico enviado com sucesso! Em breve nossa equipe entrará em contato para conversar sobre os resultados da sua empresa.';
   } catch(e) {
     statusEl.className = 'envio-status erro';
     statusEl.textContent = '❌ Não foi possível enviar os dados. Verifique sua conexão e tente novamente.';
